@@ -1,12 +1,14 @@
 package com.flightapp.webflux.service;
 
+import org.springframework.http.ResponseEntity;
+
 import com.flightapp.webflux.entity.Airline;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface AirLineService {
-	Flux<Airline> gerAllAirlines();
+	Flux<ResponseEntity<Airline>> getAllAirlines();
 
-	Mono<Airline> addAirline(Airline airline);
+	Mono<ResponseEntity<Airline>> addAirline(Airline airline);
 }
