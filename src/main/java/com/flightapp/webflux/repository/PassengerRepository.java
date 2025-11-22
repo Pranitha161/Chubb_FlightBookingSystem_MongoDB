@@ -4,6 +4,8 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
 import com.flightapp.webflux.entity.Passenger;
 
-public interface PassengerRepository extends ReactiveMongoRepository<Passenger, String> {
+import reactor.core.publisher.Mono;
 
+public interface PassengerRepository extends ReactiveMongoRepository<Passenger, String> {
+	Mono<Passenger> findByEmail(String email);
 }
