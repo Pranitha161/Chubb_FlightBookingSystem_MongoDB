@@ -22,5 +22,5 @@ public class Booking {
 	private Flight flight;
 	private List<Passenger> passengers;
 	private List<String> seatNumbers;
-	private int totalAmount;
+	private float totalAmount;
 }
