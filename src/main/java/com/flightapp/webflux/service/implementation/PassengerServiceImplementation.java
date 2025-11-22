@@ -1,0 +1,49 @@
+package com.flightapp.webflux.service.implementation;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.flightapp.webflux.entity.Passenger;
+import com.flightapp.webflux.repository.PassengerRepository;
+import com.flightapp.webflux.service.PassengerService;
+
+import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Mono;
+
+@Service
+@RequiredArgsConstructor
+public class PassengerServiceImplementation implements PassengerService {
+	private final PassengerRepository passengerRepo;
+
+	public Mono<ResponseEntity<Passenger>> getPassengerById(String passengerId) {
+		return passengerRepo.findById(passengerId).map(passenger -> ResponseEntity.ok(passenger));
+	}
+
+	public Mono<ResponseEntity<Passenger>> getPassengerByEmail(String email) {
+		return passengerRepo.findByEmail(email).map(passenger -> ResponseEntity.ok(passenger));
+	}
+
+	public Mono<ResponseEntity<Passenger>> savePassenger(Passenger passenger) {
+		return passengerRepo.findById(passenger.getId())
+				.flatMap(exists -> Mono.just(ResponseEntity.badRequest().<Passenger>build()))
+				.switchIfEmpty(passengerRepo.save(passenger)
+						.map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved)));
+	}
+
+	public Mono<ResponseEntity<Passenger>> updateById(String id, Passenger passenger) {
+		return passengerRepo.findById(id).flatMap(existing -> {
+			existing.setAge(passenger.getAge());
+			existing.setEmail(passenger.getEmail());
+			existing.setName(passenger.getName());
+			return passengerRepo.save(existing).map(saved -> ResponseEntity.ok(saved));
+		}).switchIfEmpty(Mono.just(ResponseEntity.badRequest().<Passenger>build()));
+	}
+
+	public Mono<ResponseEntity<Void>> deleteById(String passengerId) {
+		return passengerRepo.findById(passengerId).flatMap(
+				existing -> passengerRepo.delete(existing).then(Mono.just(ResponseEntity.noContent().<Void>build())))
+				.switchIfEmpty(Mono.just(ResponseEntity.notFound().<Void>build()));
+	}
+
+}
