@@ -12,6 +12,7 @@ import com.flightapp.webflux.entity.Booking;
 import com.flightapp.webflux.entity.Seat;
 import com.flightapp.webflux.repository.BookingRepository;
 import com.flightapp.webflux.repository.FlightRepository;
+import com.flightapp.webflux.repository.PassengerRepository;
 import com.flightapp.webflux.repository.SeatRepository;
 import com.flightapp.webflux.service.BookingService;
 
@@ -24,7 +25,7 @@ public class BookingServiceImplementation implements BookingService {
 	private final BookingRepository bookingRepo;
 	private final SeatRepository seatRepo;
 	private final FlightRepository flightRepo;
-
+	private final PassengerRepository passengerRepo;
 	public Mono<ResponseEntity<Booking>> getTicketsByPnr(String pnr) {
 		return bookingRepo.findByPnr(pnr).map(booking -> ResponseEntity.ok(booking)).switchIfEmpty(Mono.just(ResponseEntity.notFound().<Booking>build()));
 	}
@@ -61,7 +62,7 @@ public class BookingServiceImplementation implements BookingService {
 					booking.setFlightId(flightId);
 					flight.setAvailableSeats(flight.getAvailableSeats() - seatReq.size());
 					
-					return flightRepo.save(flight).thenMany(seatRepo.saveAll(seats)).then(bookingRepo.save(booking))
+					return flightRepo.save(flight).thenMany(seatRepo.saveAll(seats)).thenMany(passengerRepo.saveAll(booking.getPassengers())).then(bookingRepo.save(booking))
 							.thenReturn(ResponseEntity.status(HttpStatus.CREATED).<Void>build());
 				})).switchIfEmpty(Mono.just(ResponseEntity.badRequest().<Void>build()));
 	}
