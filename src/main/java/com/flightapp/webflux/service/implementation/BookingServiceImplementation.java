@@ -27,7 +27,7 @@ public class BookingServiceImplementation implements BookingService {
 	private final FlightRepository flightRepo;
 	private final PassengerRepository passengerRepo;
 	public Mono<ResponseEntity<Booking>> getTicketsByPnr(String pnr) {
-		return bookingRepo.findByPnr(pnr).map(booking -> ResponseEntity.ok(booking)).switchIfEmpty(Mono.just(ResponseEntity.notFound().<Booking>build()));
+		return bookingRepo.findByPnr(pnr).map(ResponseEntity::ok).switchIfEmpty(Mono.just(ResponseEntity.notFound().<Booking>build()));
 	}
 
 	public Mono<ResponseEntity<Booking>> getBookingsByEmail(String email) {
