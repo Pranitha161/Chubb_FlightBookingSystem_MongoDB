@@ -17,18 +17,20 @@ public class PassengerServiceImplementation implements PassengerService {
 	private final PassengerRepository passengerRepo;
 
 	public Mono<ResponseEntity<Passenger>> getPassengerById(String passengerId) {
-		return passengerRepo.findById(passengerId).map(passenger -> ResponseEntity.ok(passenger));
+		return passengerRepo.findById(passengerId).map(passenger -> ResponseEntity.ok(passenger)).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 
 	public Mono<ResponseEntity<Passenger>> getPassengerByEmail(String email) {
-		return passengerRepo.findByEmail(email).map(passenger -> ResponseEntity.ok(passenger));
+		return passengerRepo.findByEmail(email).map(passenger -> ResponseEntity.ok(passenger)).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 
-	public Mono<ResponseEntity<Passenger>> savePassenger(Passenger passenger) {
-		return passengerRepo.findById(passenger.getId())
-				.flatMap(exists -> Mono.just(ResponseEntity.badRequest().<Passenger>build()))
-				.switchIfEmpty(passengerRepo.save(passenger)
-						.map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved)));
+	public Mono<ResponseEntity<Void>> savePassenger(Passenger passenger) {
+		return passengerRepo.findById(passenger.getEmail())
+				.flatMap(exists -> Mono.just(ResponseEntity.badRequest().<Void>build()))
+				.switchIfEmpty(
+			            passengerRepo.save(passenger)
+			                .then(Mono.just(ResponseEntity.status(HttpStatus.CREATED).<Void>build()))
+			        );
 	}
 
 	public Mono<ResponseEntity<Passenger>> updateById(String id, Passenger passenger) {
