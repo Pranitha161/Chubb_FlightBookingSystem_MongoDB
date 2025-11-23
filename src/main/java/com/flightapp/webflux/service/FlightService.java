@@ -1,5 +1,7 @@
 package com.flightapp.webflux.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.flightapp.webflux.entity.Flight;
@@ -9,8 +11,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface FlightService {
-	Flux<ResponseEntity<Flight>> search(SearchRequest searchRequest);
+	Mono<ResponseEntity<List<Flight>>> search(SearchRequest searchRequest);
 
-	Mono<ResponseEntity<Flight>> addFlight(Flight flight);
+	Mono<ResponseEntity<Void>> addFlight(Flight flight);
+
+	Flux<Flight> getFlights();
+
+	Mono<ResponseEntity<Flight>> getFlightById(String flightId);
 
 }

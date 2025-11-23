@@ -1,7 +1,10 @@
 package com.flightapp.webflux.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +25,17 @@ public class FlightController {
 	private final FlightService flightService;
 
 	@PostMapping("/search")
-	public Flux<ResponseEntity<Flight>> searchFlight(@RequestBody SearchRequest searchRequest) {
+	public Mono<ResponseEntity<List<Flight>>> searchFlight(@RequestBody SearchRequest searchRequest) {
 		return flightService.search(searchRequest);
 	}
 
-	@GetMapping("/get")
-	public Mono<ResponseEntity<Flight>> getFlight(Flight flight) {
-		return flightService.addFlight(flight);
+	@GetMapping("/get/{flightId}")
+	public Mono<ResponseEntity<Flight>> getFlight(@PathVariable String flightId) {
+		return flightService.getFlightById(flightId);
+	}
+
+	@GetMapping("/get/flights")
+	public Flux<Flight> getAllFlights() {
+		return flightService.getFlights();
 	}
 }

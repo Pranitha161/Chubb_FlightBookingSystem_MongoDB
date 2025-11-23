@@ -21,7 +21,7 @@ public class Flight {
 	private LocalDateTime departureTime;
 	private int availableSeats;
 	private Price price;
-	private Airline airline;
+	private String airlineId;
 	private List<Booking> bookings;
 	private List<Seat> seats;
 
