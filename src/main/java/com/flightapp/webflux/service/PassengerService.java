@@ -11,7 +11,7 @@ public interface PassengerService {
 
 	Mono<ResponseEntity<Passenger>> getPassengerByEmail(String email);
 
-	Mono<ResponseEntity<Passenger>> savePassenger(Passenger passenger);
+	Mono<ResponseEntity<Void>> savePassenger(Passenger passenger);
 
 	Mono<ResponseEntity<Passenger>> updateById(String id, Passenger passenger);
 

@@ -27,13 +27,13 @@ public class PassengerController {
 		return passengerService.getPassengerById(passengerId);
 	}
 
-	@GetMapping("/get/{email}")
+	@GetMapping("/get/email/{email}")
 	public Mono<ResponseEntity<Passenger>> getPassenger(@PathVariable String email) {
 		return passengerService.getPassengerByEmail(email);
 	}
 
 	@PostMapping("/add")
-	public Mono<ResponseEntity<Passenger>> addPassenger(@RequestBody @Valid Passenger p) {
+	public Mono<ResponseEntity<Void>> addPassenger(@RequestBody @Valid Passenger p) {
 		return passengerService.savePassenger(p);
 	}
 
