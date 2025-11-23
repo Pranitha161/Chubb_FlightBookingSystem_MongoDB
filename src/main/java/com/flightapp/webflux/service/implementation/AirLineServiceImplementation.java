@@ -21,10 +21,10 @@ public class AirLineServiceImplementation implements AirLineService {
 		return airlineRepo.findAll().map(airline -> ResponseEntity.ok(airline));
 	}
 
-	public Mono<ResponseEntity<Airline>> addAirline(Airline airline) {
-		return airlineRepo.findById(airline.getId())
-				.flatMap(existing -> Mono.just(ResponseEntity.status(HttpStatus.CREATED).<Airline>build()))
+	public Mono<ResponseEntity<Void>> addAirline(Airline airline) {
+		return airlineRepo.findByName(airline.getName())
+				.flatMap(existing -> Mono.just(ResponseEntity.status(HttpStatus.CONFLICT).<Void>build()))
 				.switchIfEmpty(
-						airlineRepo.save(airline).map(saved -> ResponseEntity.status(HttpStatus.CREATED).body(saved)));
+						airlineRepo.save(airline).map(saved -> ResponseEntity.status(HttpStatus.CREATED).<Void>build()));
 	}
 }
