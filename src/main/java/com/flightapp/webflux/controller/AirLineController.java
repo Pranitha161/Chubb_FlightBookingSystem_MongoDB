@@ -33,8 +33,8 @@ public class AirLineController {
 		return airlineService.getAllAirlines();
 	}
 
-	@PostMapping("/add/airline")
-	public Mono<ResponseEntity<Airline>> addAirline(@RequestBody Airline airline) {
+	@PostMapping("/add")
+	public Mono<ResponseEntity<Void>> addAirline(@RequestBody Airline airline) {
 		return airlineService.addAirline(airline);
 	}
 }
