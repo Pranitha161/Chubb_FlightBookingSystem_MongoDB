@@ -17,8 +17,8 @@ import reactor.core.publisher.Mono;
 public class AirLineServiceImplementation implements AirLineService {
 	private final AirLineRepository airlineRepo;
 
-	public Flux<ResponseEntity<Airline>> getAllAirlines() {
-		return airlineRepo.findAll().map(airline -> ResponseEntity.ok(airline));
+	public Flux<Airline> getAllAirlines() {
+		return airlineRepo.findAll();
 	}
 
 	public Mono<ResponseEntity<Void>> addAirline(Airline airline) {

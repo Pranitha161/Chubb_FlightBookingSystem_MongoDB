@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface AirLineService {
-	Flux<ResponseEntity<Airline>> getAllAirlines();
+	Flux<Airline> getAllAirlines();
 
 	Mono<ResponseEntity<Void>> addAirline(Airline airline);
 }

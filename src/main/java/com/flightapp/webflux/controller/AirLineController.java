@@ -24,12 +24,12 @@ public class AirLineController {
 	private final AirLineService airlineService;
 
 	@PostMapping("/inventory/add")
-	public Mono<ResponseEntity<Flight>> addInventory(@RequestBody Flight flight) {
+	public Mono<ResponseEntity<Void>> addInventory(@RequestBody Flight flight) {
 		return flightService.addFlight(flight);
 	}
 
 	@GetMapping("/get")
-	public Flux<ResponseEntity<Airline>> getAirlines() {
+	public Flux<Airline> getAirlines() {
 		return airlineService.getAllAirlines();
 	}
 
