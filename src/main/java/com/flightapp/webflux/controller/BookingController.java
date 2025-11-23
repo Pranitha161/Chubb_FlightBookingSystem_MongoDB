@@ -23,6 +23,7 @@ public class BookingController {
 
 	@PostMapping("booking/{flightId}")
 	public Mono<ResponseEntity<Void>> bookTicket(@RequestBody Booking booking, @PathVariable String flightId) {
+		System.out.println("Heyy working");
 		return bookingService.bookTicket(flightId, booking);
 	}
 

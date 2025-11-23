@@ -15,11 +15,11 @@ public class Booking {
 	@Id
 	private String id;
 	private String pnr;
-	private int email;
+	private String email;
 	private int seatCount;
 	private TripType tripType;
 	private MealPreference mealPrefernce;
-	private Flight flight;
+	private String flightId;
 	private List<Passenger> passengers;
 	private List<String> seatNumbers;
 	private float totalAmount;
