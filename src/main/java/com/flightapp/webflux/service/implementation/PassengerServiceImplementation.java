@@ -25,7 +25,7 @@ public class PassengerServiceImplementation implements PassengerService {
 	}
 
 	public Mono<ResponseEntity<Void>> savePassenger(Passenger passenger) {
-		return passengerRepo.findById(passenger.getEmail())
+		return passengerRepo.findByEmail(passenger.getEmail())
 				.flatMap(exists -> Mono.just(ResponseEntity.badRequest().<Void>build()))
 				.switchIfEmpty(
 			            passengerRepo.save(passenger)
