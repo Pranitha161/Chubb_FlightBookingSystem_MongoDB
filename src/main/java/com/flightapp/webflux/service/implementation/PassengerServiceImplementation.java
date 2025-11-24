@@ -17,11 +17,11 @@ public class PassengerServiceImplementation implements PassengerService {
 	private final PassengerRepository passengerRepo;
 
 	public Mono<ResponseEntity<Passenger>> getPassengerById(String passengerId) {
-		return passengerRepo.findById(passengerId).map(passenger -> ResponseEntity.ok(passenger)).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+		return passengerRepo.findById(passengerId).map(ResponseEntity::ok).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 
 	public Mono<ResponseEntity<Passenger>> getPassengerByEmail(String email) {
-		return passengerRepo.findByEmail(email).map(passenger -> ResponseEntity.ok(passenger)).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
+		return passengerRepo.findByEmail(email).map(ResponseEntity::ok).switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 
 	public Mono<ResponseEntity<Void>> savePassenger(Passenger passenger) {
@@ -38,7 +38,7 @@ public class PassengerServiceImplementation implements PassengerService {
 			existing.setAge(passenger.getAge());
 			existing.setEmail(passenger.getEmail());
 			existing.setName(passenger.getName());
-			return passengerRepo.save(existing).map(saved -> ResponseEntity.ok(saved));
+			return passengerRepo.save(existing).map(ResponseEntity::ok);
 		}).switchIfEmpty(Mono.just(ResponseEntity.badRequest().<Passenger>build()));
 	}
 

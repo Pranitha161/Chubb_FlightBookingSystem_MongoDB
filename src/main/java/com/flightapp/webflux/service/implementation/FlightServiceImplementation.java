@@ -55,7 +55,7 @@ public class FlightServiceImplementation implements FlightService {
 
 	@Override
 	public Mono<ResponseEntity<Flight>> getFlightById(String flightId) {
-		return flightRepo.findById(flightId).map(exists -> ResponseEntity.ok(exists))
+		return flightRepo.findById(flightId).map(ResponseEntity::ok)
 				.switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
 	}
 }

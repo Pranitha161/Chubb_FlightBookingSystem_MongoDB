@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import com.flightapp.webflux.entity.Airline;
@@ -28,7 +29,7 @@ import reactor.core.publisher.Mono;
 class AirLineControllerTest {
 	@Autowired
 	WebTestClient webtestClient;
-	@MockBean
+	@MockitoBean
 	FlightService flightService;
 	@MockBean
 	AirLineService airlineService;
