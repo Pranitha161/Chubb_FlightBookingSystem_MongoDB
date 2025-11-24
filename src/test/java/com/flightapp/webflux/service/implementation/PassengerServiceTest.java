@@ -20,7 +20,7 @@ import com.flightapp.webflux.repository.PassengerRepository;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(MockitoExtension.class)
-public class PassengerServiceTest {
+class PassengerServiceTest {
 	@InjectMocks
 	private PassengerServiceImplementation passengerService;
 	@Mock
