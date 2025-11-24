@@ -12,5 +12,4 @@ public interface AirLineService {
 
 	Mono<ResponseEntity<Void>> addAirline(Airline airline);
 	
-
 }
