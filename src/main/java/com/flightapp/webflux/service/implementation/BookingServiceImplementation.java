@@ -31,7 +31,8 @@ public class BookingServiceImplementation implements BookingService {
 	}
 
 	public Mono<ResponseEntity<Booking>> getBookingsByEmail(String email) {
-		return bookingRepo.findByEmail(email).map(booking -> ResponseEntity.ok(booking)).switchIfEmpty(Mono.just(ResponseEntity.notFound().<Booking>build()));
+		return bookingRepo.findByEmail(email).map(ResponseEntity::ok).switchIfEmpty(Mono.just(ResponseEntity.notFound().<Booking>build()));
+		//Sonar cloud maintainability recommendation lambda to reference
 	}
 
 	public Mono<ResponseEntity<Void>> deleteBookingByPnr(String pnr) {
@@ -44,7 +45,6 @@ public class BookingServiceImplementation implements BookingService {
 		return flightRepo.findById(flightId)
 				.flatMap(flight -> seatRepo.findByFlightId(flightId).collectList().flatMap(seats -> {
 					List<String> seatReq = booking.getSeatNumbers();
-					System.out.println(seatReq);
 					for (String req : seatReq) {
 						Seat seat = seats.stream().filter(s -> s.getSeatNumber().equals(req)).findFirst().orElse(null);
 						if (seat == null || !seat.isAvailable()) {
