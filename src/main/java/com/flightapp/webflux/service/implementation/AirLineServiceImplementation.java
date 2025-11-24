@@ -1,9 +1,5 @@
 package com.flightapp.webflux.service.implementation;
 
-import javax.swing.text.Document;
-
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
