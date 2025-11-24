@@ -57,7 +57,7 @@ public class BookingServiceImplementation implements BookingService {
 );
 					float price = booking.getTripType().equals("ROUND_TRIP")
 	                        ? flight.getPrice().getRoundTrip()
-	                        : flight.getPrice().getRoundTrip();
+	                        : flight.getPrice().getOneWay();
 					booking.setTotalAmount(price);
 					booking.setFlightId(flightId);
 					flight.setAvailableSeats(flight.getAvailableSeats() - seatReq.size());
