@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-public class FlightTest {
+class FlightTest {
 	@Test
 	void testFlightGettersAndSetters() {
 		Flight flight = new Flight();
@@ -29,9 +29,10 @@ public class FlightTest {
 		assertEquals(2000, flight.getPrice().getOneWay());
 		assertEquals(9000, flight.getPrice().getRoundTrip());
 	}
+
 	@Test
 	void testDefaultValues() {
-		Flight flight=new Flight();
+		Flight flight = new Flight();
 		assertNotNull(flight);
 		assertNull(flight.getId());
 		assertNull(flight.getAirlineId());

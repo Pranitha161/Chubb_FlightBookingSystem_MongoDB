@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-public class SearchRequestTest {
+class SearchRequestTest {
 	@Test
 	void TestSearchRequestGettersAndSetters() {
 		SearchRequest searchRequest = new SearchRequest();

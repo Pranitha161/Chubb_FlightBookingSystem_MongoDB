@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-public class PassengerTest {
+class PassengerTest {
 	@Test
 	void testPassengerGettersandSetter() {
 		Passenger passenger = new Passenger();

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import com.flightapp.webflux.enums.MealPreference;
 import com.flightapp.webflux.enums.TripType;
 
-public class BookingTest {
+class BookingTest {
 	@Test
 	void testBookingGettersAndSetters() {
 		Booking booking = new Booking();
@@ -51,7 +51,7 @@ public class BookingTest {
 		assertNull(booking.getId());
 		assertNull(booking.getMealPrefernce());
 		assertNull(booking.getTripType());
-		assertEquals(0,booking.getSeatCount());
+		assertEquals(0, booking.getSeatCount());
 
 	}
 }
