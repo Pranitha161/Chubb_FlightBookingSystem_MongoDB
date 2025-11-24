@@ -134,7 +134,15 @@ class BookingControllerTest {
 		webtestClient.post().uri("/api/v1.0/flight/booking/{flightId}", "123").bodyValue(booking).exchange()
 				.expectStatus().isNotFound();
 	}
-
+	@Test
+	void testRoundTrip() {
+		Booking booking=new Booking();
+		booking.setEmail("hello@example.com");
+		booking.setTripType(TripType.ROUND_TRIP);
+		booking.setSeatNumbers(List.of("L1"));
+		when(bookingService.bookTicket(eq("123"),any(Booking.class))).thenReturn(Mono.just(ResponseEntity.status(HttpStatus.CREATED).build()));
+		webtestClient.post().uri("/api/v1.0/flight/booking/{flightId}", "123").bodyValue(booking).exchange().expectStatus().isCreated();
+	}
 	@Test
 	void testDeleteSuccessfully() {
 		Booking booking = new Booking();
