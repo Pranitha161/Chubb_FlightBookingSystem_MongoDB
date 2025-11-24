@@ -27,7 +27,7 @@ import com.flightapp.webflux.service.BookingService;
 import reactor.core.publisher.Mono;
 
 @WebFluxTest(BookingController.class)
-public class BookingControllerTest {
+class BookingControllerTest {
 	@Autowired
 	WebTestClient webtestClient;
 	@MockBean
