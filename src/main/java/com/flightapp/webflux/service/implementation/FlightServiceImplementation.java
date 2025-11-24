@@ -10,7 +10,6 @@ import com.flightapp.webflux.entity.Flight;
 import com.flightapp.webflux.entity.SearchRequest;
 import com.flightapp.webflux.repository.AirLineRepository;
 import com.flightapp.webflux.repository.FlightRepository;
-import com.flightapp.webflux.repository.SeatRepository;
 import com.flightapp.webflux.service.FlightService;
 import com.flightapp.webflux.service.Seatservice;
 
