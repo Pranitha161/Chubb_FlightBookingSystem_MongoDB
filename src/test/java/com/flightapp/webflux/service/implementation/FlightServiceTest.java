@@ -106,6 +106,13 @@ class FlightServiceTest {
 		assertEquals(HttpStatus.BAD_REQUEST,res.getStatusCode());
 	}
 	@Test
+	void testAddFlightInvalidSeats() {
+		Flight flight=new Flight();
+		flight.setAvailableSeats(5);
+		ResponseEntity<Void> res=flightService.addFlight(flight).block();
+		assertEquals(HttpStatus.BAD_REQUEST,res.getStatusCode());
+	}
+	@Test
 	void testGetFlightsSuccess() {
 		Flight flight=new Flight();
 		flight.setAirlineId("123");
