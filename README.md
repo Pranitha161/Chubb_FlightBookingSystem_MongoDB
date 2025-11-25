@@ -26,11 +26,5 @@ The goal is to design a small airline booking platform, model the data entities,
 - Apache JMeter (performance/load testing)
 - SonarQube (static analysis and code quality)
 
----
 
-##  Schema Diagram
-
-The following diagram shows the entity relationships and booking flow:
-
-![Schema Diagram](Schema.png)
 
